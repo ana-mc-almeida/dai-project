@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<job xmlns="http://eobjects.org/analyzerbeans/job/1.0">
+    <job-metadata>
+        <job-description>Created with DataCleaner Community edition 5.8.1</job-description>
+        <author>aid</author>
+        <updated-date>2024-09-21+01:00</updated-date>
+        <metadata-properties>
+            <property name="CoordinatesX.Project.SmartMeterPercent_and_AvgConsumtionPerContract_byMunicipality_june2024.csv">145</property>
+            <property name="CoordinatesY.Project.SmartMeterPercent_and_AvgConsumtionPerContract_byMunicipality_june2024.csv">184</property>
+        </metadata-properties>
+    </job-metadata>
+    <source>
+        <data-context ref="SmartMeterPercent_and_AvgConsumtionPerContract_byMunicipality_june2024.csv"/>
+        <columns>
+            <column id="col_municipality" path="Municipality" type="STRING"/>
+            <column id="col_smartmeter" path="Smart Meter (%)" type="STRING"/>
+            <column id="col_consumptionpercontractkwh" path="Consumption per Contract (kWh)" type="STRING"/>
+        </columns>
+    </source>
+    <transformation>
+        <transformer>
+            <descriptor ref="Convert to number"/>
+            <metadata-properties>
+                <property name="CoordinatesY">285</property>
+                <property name="CoordinatesX">158</property>
+            </metadata-properties>
+            <properties>
+                <property name="Decimal separator" value="."/>
+                <property name="Minus sign" value="-"/>
+                <property name="Null replacement" value="&lt;null&gt;"/>
+                <property name="Thousand separator" value="&amp;#44;"/>
+            </properties>
+            <input ref="col_smartmeter"/>
+            <input ref="col_consumptionpercontractkwh"/>
+            <output id="col_smartmeter2" name="Smart Meter (%) "/>
+            <output id="col_consumptionpercontractkwh2" name="Consumption per Contract (kWh) "/>
+        </transformer>
+    </transformation>
+    <analysis>
+        <analyzer>
+            <descriptor ref="Scatter plot"/>
+            <metadata-properties>
+                <property name="CoordinatesY">381</property>
+                <property name="CoordinatesX">161</property>
+            </metadata-properties>
+            <properties/>
+            <input ref="col_smartmeter2" name="Variable1"/>
+            <input ref="col_consumptionpercontractkwh2" name="Variable2"/>
+        </analyzer>
+    </analysis>
+</job>
