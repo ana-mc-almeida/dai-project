@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>ProjectTask3ransformation</name>
+    <name>proj_fact_table</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -427,81 +428,367 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2024/09/30 15:12:45.503</created_date>
+    <created_date>2024/10/17 19:05:59.562</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2024/09/30 15:12:45.503</modified_date>
+    <modified_date>2024/10/17 19:05:59.562</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>energy_dw</name>
+    <server>localhost</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>energy_dw</database>
+    <port>3306</port>
+    <username>aid</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce10be93a6de</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.defaultFetchSize</code>
+        <attribute>500</attribute>
+      </attribute>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.useCursorFetch</code>
+        <attribute>true</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>3306</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <order>
     <hop>
-      <from>CSV file input 2</from>
-      <to>Select values 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values 2</from>
-      <to>Sort rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows</from>
-      <to>Unique rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows 2</from>
-      <to>Unique rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Unique rows</from>
-      <to>Join rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Unique rows 2</from>
-      <to>Join rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>CSV file input</from>
+      <from>CSV file input 3</from>
       <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>CSV file input</from>
+      <to>Select values 4</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Database lookup</from>
+      <to>Database lookup 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Database lookup 2</from>
+      <to>Insert / update</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add sequence</from>
+      <to>Database lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 2</from>
+      <to>Group by 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Group by 2 2</from>
+      <to>Formula</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 4</from>
+      <to>Sort rows 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>Select values</from>
-      <to>Sort rows</to>
+      <to>Formula 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Join rows</from>
-      <to>Calculator 2</to>
+      <from>Formula 2</from>
+      <to>Sort rows 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows</from>
-      <to>Select values 3</to>
+      <from>Sort rows 3</from>
+      <to>Group by</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Calculator 2</from>
-      <to>Filter rows</to>
+      <from>Formula</from>
+      <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 3</from>
-      <to>Text file output</to>
+      <from>Group by</from>
+      <to>Stream lookup 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Stream lookup 2</from>
+      <to>Add sequence</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
+      <to>Stream lookup 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Add sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <valuename>fact_id</valuename>
+    <use_database>N</use_database>
+    <connection>energy_dw</connection>
+    <schema/>
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name/>
+    <start_at>1</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>896</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>CSV file input</name>
     <type>CsvInput</type>
     <description/>
     <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>/home/aid/dai-project/datasetB.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>;</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>N</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding>UTF-8</encoding>
+    <fields>
+      <field>
+        <name>﻿Year</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Month</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Date</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>7</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>District</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>16</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Municipality</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>27</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>parish</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>30</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Voltage level</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>32</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Active Energy (kWh)</name>
+        <type>Number</type>
+        <format>#.#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>3</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DistrictCode</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DistrictMunicipalityCode</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DistrictMunicipalityParishCode</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>6</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>mes_int</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>CSV file input 3</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -665,170 +952,57 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>48</xloc>
-      <yloc>96</yloc>
+      <xloc>80</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>CSV file input 2</name>
-    <type>CsvInput</type>
+    <name>Database lookup</name>
+    <type>DBLookup</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/aid/dai-project/datasetB.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>;</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>N</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding/>
-    <fields>
-      <field>
-        <name>﻿Year</name>
+    <connection>energy_dw</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>energy_dw</schema>
+      <table>dim_location</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>district2</name>
+        <field>district_code</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>municipality2</name>
+        <field>municipality_code</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>parish2</name>
+        <field>parish</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>location_id</name>
+        <rename>location_id</rename>
+        <default/>
         <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Month</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Date</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>7</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>District</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>16</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Municipality</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>26</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>parish</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>30</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Voltage level</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>32</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Active Energy (kWh)</name>
-        <type>Number</type>
-        <format>#.#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>12</length>
-        <precision>3</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DistrictCode</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DistrictMunicipalityCode</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DistrictMunicipalityParishCode</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>mes_int</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -838,14 +1012,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>48</xloc>
-      <yloc>256</yloc>
+      <xloc>1008</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Calculator 2</name>
-    <type>Calculator</type>
+    <name>Database lookup 2</name>
+    <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -854,78 +1028,62 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <failIfNoFile>N</failIfNoFile>
-    <calculation>
-      <field_name>distance</field_name>
-      <calc_type>JARO_WINKLER</calc_type>
-      <field_a>district1</field_a>
-      <field_b>district2</field_b>
-      <field_c/>
+    <connection>energy_dw</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>energy_dw</schema>
+      <table>dim_time</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>date2</name>
+        <field>date_value</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>time_id</name>
+        <rename>time_id</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1136</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Formula</name>
+    <type>Formula</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <formula>
+      <field_name>smart_meter(%)</field_name>
+      <formula_string>([smart_meter] / ([smart_meter]+[non_smart_meter]) )*100</formula_string>
       <value_type>Number</value_type>
       <value_length>-1</value_length>
       <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>592</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>Select values 3</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <conditions>
-          <condition>
-            <negated>N</negated>
-            <leftvalue>distance</leftvalue>
-            <function>IS NOT NULL</function>
-            <rightvalue/>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>AND</operator>
-            <leftvalue>distance</leftvalue>
-            <function>&gt;</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>Number</type>
-              <text>0.95</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask>####0.0#########;-####0.0#########</mask>
-            </value>
-          </condition>
-        </conditions>
-      </condition>
-    </compare>
+      <replace_field/>
+    </formula>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -936,33 +1094,57 @@
     </remotesteps>
     <GUI>
       <xloc>688</xloc>
-      <yloc>176</yloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Join rows</name>
-    <type>JoinRows</type>
+    <name>Group by 2 2</name>
+    <type>GroupBy</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
     <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <cache_size>500</cache_size>
-    <main/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue/>
-        <function>=</function>
-        <rightvalue/>
-      </condition>
-    </compare>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>date1</name>
+      </field>
+      <field>
+        <name>district1</name>
+      </field>
+      <field>
+        <name>municipality1</name>
+      </field>
+      <field>
+        <name>parish1</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>smart_meter</aggregate>
+        <subject>Smart_Meter</subject>
+        <type>SUM</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>non_smart_meter</aggregate>
+        <subject>Non_Smart_Meter</subject>
+        <type>SUM</type>
+        <valuefield/>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -972,8 +1154,71 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>176</yloc>
+      <xloc>560</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>energy_dw</connection>
+    <commit>100</commit>
+    <update_bypassed>Y</update_bypassed>
+    <lookup>
+      <schema>energy_dw</schema>
+      <table>fact_energy_consumption</table>
+      <key>
+        <name>fact_id</name>
+        <field>fact_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>smart_measures</name>
+        <rename>smart_meter(%)</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>energy_consumption</name>
+        <rename>energy_consumption</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>location_id</name>
+        <rename>location_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>time_id</name>
+        <rename>time_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>fact_id</name>
+        <rename>fact_id</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1264</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -981,7 +1226,7 @@
     <name>Select values</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -990,8 +1235,28 @@
     </partitioning>
     <fields>
       <field>
-        <name>District</name>
+        <name>Date</name>
+        <rename>date1</rename>
+      </field>
+      <field>
+        <name>DistrictMunicipalityCode</name>
+        <rename>municipality1</rename>
+      </field>
+      <field>
+        <name>Includes Smart Meter</name>
+        <rename>includes_smart_meter</rename>
+      </field>
+      <field>
+        <name>Number of CPE's</name>
+        <rename>number_of_cpes</rename>
+      </field>
+      <field>
+        <name>DistrictCode</name>
         <rename>district1</rename>
+      </field>
+      <field>
+        <name>Parish</name>
+        <rename>parish1</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1004,8 +1269,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>96</yloc>
+      <xloc>192</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1013,7 +1278,7 @@
     <name>Select values 2</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1022,8 +1287,19 @@
     </partitioning>
     <fields>
       <field>
-        <name>District</name>
-        <rename>district2</rename>
+        <name>date1</name>
+      </field>
+      <field>
+        <name>district1</name>
+      </field>
+      <field>
+        <name>municipality1</name>
+      </field>
+      <field>
+        <name>parish1</name>
+      </field>
+      <field>
+        <name>smart_meter(%)</name>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1036,16 +1312,16 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>256</yloc>
+      <xloc>784</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values 3</name>
+    <name>Select values 4</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1054,12 +1330,24 @@
     </partitioning>
     <fields>
       <field>
-        <name>district1</name>
-        <rename>District_A</rename>
+        <name>Date</name>
+        <rename>date2</rename>
       </field>
       <field>
-        <name>district2</name>
-        <rename>District_B</rename>
+        <name>DistrictCode</name>
+        <rename>district2</rename>
+      </field>
+      <field>
+        <name>DistrictMunicipalityCode</name>
+        <rename>municipality2</rename>
+      </field>
+      <field>
+        <name>parish</name>
+        <rename>parish2</rename>
+      </field>
+      <field>
+        <name>Active Energy (kWh)</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1072,50 +1360,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>district1</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>256</xloc>
-      <yloc>96</yloc>
+      <xloc>416</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1123,7 +1369,7 @@
     <name>Sort rows 2</name>
     <type>SortRows</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1139,7 +1385,31 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>district2</name>
+        <name>date1</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>district1</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>municipality1</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>parish1</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1156,122 +1426,61 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>256</yloc>
+      <xloc>432</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Text file output</name>
-    <type>TextFileOutput</type>
+    <name>Sort rows 3</name>
+    <type>SortRows</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator>;</separator>
-    <enclosure>"</enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding>UTF-8</encoding>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>N</create_parent_folder>
-    <file>
-      <name>/home/aid/Documents/Task3Project_out</name>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>csv</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery/>
-    </file>
-    <fields>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>912</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Unique rows</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>district1</name>
-        <case_insensitive>N</case_insensitive>
+        <name>date2</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>352</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Unique rows 2</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
       <field>
         <name>district2</name>
-        <case_insensitive>N</case_insensitive>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>municipality2</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>parish2</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
     </fields>
     <attributes/>
@@ -1283,8 +1492,158 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
-      <yloc>256</yloc>
+      <xloc>544</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Formula 2</name>
+    <type>Formula</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <formula>
+      <field_name>Smart_meter</field_name>
+      <formula_string>([includes_smart_meter]="Sim") *  [number_of_cpes]</formula_string>
+      <value_type>Number</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field/>
+    </formula>
+    <formula>
+      <field_name>Non_smart_meter</field_name>
+      <formula_string>([includes_smart_meter]="Não") *  [number_of_cpes]</formula_string>
+      <value_type>Number</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field/>
+    </formula>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Group by</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>date2</name>
+      </field>
+      <field>
+        <name>district2</name>
+      </field>
+      <field>
+        <name>municipality2</name>
+      </field>
+      <field>
+        <name>parish2</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>energy_consumption</aggregate>
+        <subject>Active Energy (kWh)</subject>
+        <type>SUM</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Stream lookup 2</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>Select values 2</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>date2</name>
+        <field>date1</field>
+      </key>
+      <key>
+        <name>district2</name>
+        <field>district1</field>
+      </key>
+      <key>
+        <name>municipality2</name>
+        <field>municipality1</field>
+      </key>
+      <key>
+        <name>parish2</name>
+        <field>parish1</field>
+      </key>
+      <value>
+        <name>smart_meter(%)</name>
+        <rename>smart_meter(%)</rename>
+        <default/>
+        <type>Number</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>784</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
