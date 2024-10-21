@@ -1,0 +1,35 @@
+<Schema name="energy_dw">
+  <Cube name="energy_dw" visible="true" cache="true" enabled="true">
+    <Table name="fact_energy_consumption">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="location_id" name="Location">
+      <Hierarchy name="Location Hierarchy" visible="true" hasAll="true" allMemberName="All Locations" primaryKey="location_id">
+        <Table name="dim_location">
+        </Table>
+        <Level name="District" visible="true" column="district" ordinalColumn="district_code" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+        <Level name="Municipality" visible="true" column="municipality" ordinalColumn="municipality_code" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+        <Level name="Parish" visible="true" column="parish" ordinalColumn="parish_code" type="String" uniqueMembers="false" levelType="Regular">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="TimeDimension" visible="true" foreignKey="time_id" name="Time">
+      <Hierarchy name="Time Hierarchy" visible="true" hasAll="true" allMemberName="All Years" primaryKey="time_id">
+        <Table name="dim_time">
+        </Table>
+        <Level name="Year" visible="true" column="year_id" type="Integer" uniqueMembers="false" levelType="TimeYears">
+        </Level>
+        <Level name="Season" visible="true" column="season_name" ordinalColumn="season_id" type="String" uniqueMembers="false" levelType="TimeUndefined">
+        </Level>
+        <Level name="Month" visible="true" column="month_name" ordinalColumn="month_id" type="String" uniqueMembers="false" levelType="TimeMonths">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="energy_consumption" column="energy_consumption" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="smart_measures" column="smart_measures" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
+
