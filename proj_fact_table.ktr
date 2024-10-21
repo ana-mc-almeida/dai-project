@@ -622,7 +622,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/aid/dai-project/datasetB.csv</filename>
+    <filename>${Internal.Entry.Current.Directory}/datasetB.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -795,7 +795,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/aid/dai-project/datasetA.csv</filename>
+    <filename>${Internal.Entry.Current.Directory}/datasetA.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1099,6 +1099,102 @@
     </GUI>
   </step>
   <step>
+    <name>Formula 2</name>
+    <type>Formula</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <formula>
+      <field_name>Smart_meter</field_name>
+      <formula_string>([includes_smart_meter]="Sim") *  [number_of_cpes]</formula_string>
+      <value_type>Number</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field/>
+    </formula>
+    <formula>
+      <field_name>Non_smart_meter</field_name>
+      <formula_string>([includes_smart_meter]="Não") *  [number_of_cpes]</formula_string>
+      <value_type>Number</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field/>
+    </formula>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Group by</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>date2</name>
+      </field>
+      <field>
+        <name>district2</name>
+      </field>
+      <field>
+        <name>municipality2</name>
+      </field>
+      <field>
+        <name>parish2</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>energy_consumption</aggregate>
+        <subject>Active Energy (kWh)</subject>
+        <type>SUM</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Group by 2 2</name>
     <type>GroupBy</type>
     <description/>
@@ -1347,7 +1443,6 @@
       </field>
       <field>
         <name>Active Energy (kWh)</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1493,102 +1588,6 @@
     </remotesteps>
     <GUI>
       <xloc>544</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Formula 2</name>
-    <type>Formula</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <formula>
-      <field_name>Smart_meter</field_name>
-      <formula_string>([includes_smart_meter]="Sim") *  [number_of_cpes]</formula_string>
-      <value_type>Number</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <replace_field/>
-    </formula>
-    <formula>
-      <field_name>Non_smart_meter</field_name>
-      <formula_string>([includes_smart_meter]="Não") *  [number_of_cpes]</formula_string>
-      <value_type>Number</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <replace_field/>
-    </formula>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Group by</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore/>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname/>
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>date2</name>
-      </field>
-      <field>
-        <name>district2</name>
-      </field>
-      <field>
-        <name>municipality2</name>
-      </field>
-      <field>
-        <name>parish2</name>
-      </field>
-    </group>
-    <fields>
-      <field>
-        <aggregate>energy_consumption</aggregate>
-        <subject>Active Energy (kWh)</subject>
-        <type>SUM</type>
-        <valuefield/>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>672</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
