@@ -903,12 +903,6 @@
         <conditions>
           <condition>
             <negated>N</negated>
-            <leftvalue>distance</leftvalue>
-            <function>IS NOT NULL</function>
-            <rightvalue/>
-          </condition>
-          <condition>
-            <negated>N</negated>
             <operator>AND</operator>
             <leftvalue>distance</leftvalue>
             <function>&gt;</function>

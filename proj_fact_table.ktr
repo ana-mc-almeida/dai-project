@@ -501,118 +501,83 @@
   </connection>
   <order>
     <hop>
-      <from>CSV file input 3</from>
+      <from>CSV file input </from>
       <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CSV file input</from>
-      <to>Select values 4</to>
+      <from>CSV file input 2</from>
+      <to>Select values 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Database lookup</from>
-      <to>Database lookup 2</to>
+      <from>Database lookup 3</from>
+      <to>Database lookup 4</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Database lookup 2</from>
-      <to>Insert / update</to>
+      <from>Sort rows </from>
+      <to>Group by </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add sequence</from>
-      <to>Database lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows 2</from>
-      <to>Group by 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Group by 2 2</from>
-      <to>Formula</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values 4</from>
-      <to>Sort rows 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
+      <from>Group by </from>
       <to>Formula 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Formula 2</from>
+      <from>Select values 3</from>
       <to>Sort rows 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort rows 3</from>
-      <to>Group by</to>
+      <from>Formula </from>
+      <to>Sort rows </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Formula</from>
+      <from>Sort rows 2</from>
+      <to>Group by 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Formula 2</from>
       <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Group by</from>
-      <to>Stream lookup 2</to>
+      <from>Database lookup 4</from>
+      <to>Insert / update 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Stream lookup 2</from>
-      <to>Add sequence</to>
+      <from>Database lookup </from>
+      <to>Database lookup 2 </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Database lookup 2 </from>
+      <to>Insert / update </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Select values 2</from>
-      <to>Stream lookup 2</to>
+      <to>Database lookup </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Group by 2</from>
+      <to>Database lookup 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Formula </to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Add sequence</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <valuename>fact_id</valuename>
-    <use_database>N</use_database>
-    <connection>energy_dw</connection>
-    <schema/>
-    <seqname>SEQ_</seqname>
-    <use_counter>Y</use_counter>
-    <counter_name/>
-    <start_at>1</start_at>
-    <increment_by>1</increment_by>
-    <max_value>999999999</max_value>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>896</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>CSV file input</name>
+    <name>CSV file input 2</name>
     <type>CsvInput</type>
     <description/>
     <distribute>N</distribute>
@@ -622,7 +587,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${Internal.Entry.Current.Directory}/datasetB.csv</filename>
+    <filename>/home/aid/dai-project/datasetB.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -779,13 +744,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
-      <yloc>192</yloc>
+      <xloc>208</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>CSV file input 3</name>
+    <name>CSV file input </name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -795,7 +760,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${Internal.Entry.Current.Directory}/datasetA.csv</filename>
+    <filename>/home/aid/dai-project/datasetA.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -952,13 +917,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
+      <xloc>208</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Database lookup</name>
+    <name>Database lookup 3</name>
     <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -1012,16 +977,16 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
-      <yloc>192</yloc>
+      <xloc>736</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Database lookup 2</name>
+    <name>Database lookup 4</name>
     <type>DBLookup</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1060,13 +1025,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1136</xloc>
-      <yloc>192</yloc>
+      <xloc>880</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Formula</name>
+    <name>Formula 2</name>
     <type>Formula</type>
     <description/>
     <distribute>Y</distribute>
@@ -1093,13 +1058,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>688</xloc>
+      <xloc>832</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Formula 2</name>
+    <name>Formula </name>
     <type>Formula</type>
     <description/>
     <distribute>Y</distribute>
@@ -1134,13 +1099,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
+      <xloc>464</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Group by</name>
+    <name>Group by 2</name>
     <type>GroupBy</type>
     <description/>
     <distribute>N</distribute>
@@ -1189,13 +1154,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>672</xloc>
-      <yloc>192</yloc>
+      <xloc>608</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Group by 2 2</name>
+    <name>Group by </name>
     <type>GroupBy</type>
     <description/>
     <distribute>N</distribute>
@@ -1250,13 +1215,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
+      <xloc>704</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Insert / update</name>
+    <name>Insert / update 2</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -1268,21 +1233,22 @@
     </partitioning>
     <connection>energy_dw</connection>
     <commit>100</commit>
-    <update_bypassed>Y</update_bypassed>
+    <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>energy_dw</schema>
       <table>fact_energy_consumption</table>
       <key>
-        <name>fact_id</name>
-        <field>fact_id</field>
+        <name>location_id</name>
+        <field>location_id</field>
         <condition>=</condition>
         <name2/>
       </key>
-      <value>
-        <name>smart_measures</name>
-        <rename>smart_meter(%)</rename>
-        <update>Y</update>
-      </value>
+      <key>
+        <name>time_id</name>
+        <field>time_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>energy_consumption</name>
         <rename>energy_consumption</rename>
@@ -1298,11 +1264,6 @@
         <rename>time_id</rename>
         <update>Y</update>
       </value>
-      <value>
-        <name>fact_id</name>
-        <rename>fact_id</rename>
-        <update>Y</update>
-      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -1313,8 +1274,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1264</xloc>
-      <yloc>192</yloc>
+      <xloc>1024</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1365,7 +1326,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>192</xloc>
+      <xloc>336</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1408,13 +1369,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
+      <xloc>928</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values 4</name>
+    <name>Select values 3</name>
     <type>SelectValues</type>
     <description/>
     <distribute>N</distribute>
@@ -1443,6 +1404,7 @@
       </field>
       <field>
         <name>Active Energy (kWh)</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1455,13 +1417,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
-      <yloc>192</yloc>
+      <xloc>352</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Sort rows 2</name>
+    <name>Sort rows </name>
     <type>SortRows</type>
     <description/>
     <distribute>N</distribute>
@@ -1521,13 +1483,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
+      <xloc>576</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Sort rows 3</name>
+    <name>Sort rows 2</name>
     <type>SortRows</type>
     <description/>
     <distribute>N</distribute>
@@ -1587,14 +1549,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>544</xloc>
-      <yloc>192</yloc>
+      <xloc>480</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Stream lookup 2</name>
-    <type>StreamLookup</type>
+    <name>Database lookup </name>
+    <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1603,33 +1565,39 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Select values 2</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
+    <connection>energy_dw</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
     <lookup>
+      <schema>energy_dw</schema>
+      <table>dim_location</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>Y</eat_row_on_failure>
       <key>
-        <name>date2</name>
-        <field>date1</field>
+        <name>district1</name>
+        <field>district_code</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <key>
-        <name>district2</name>
-        <field>district1</field>
+        <name>municipality1</name>
+        <field>municipality_code</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <key>
-        <name>municipality2</name>
-        <field>municipality1</field>
-      </key>
-      <key>
-        <name>parish2</name>
-        <field>parish1</field>
+        <name>parish1</name>
+        <field>parish</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <value>
-        <name>smart_meter(%)</name>
-        <rename>smart_meter(%)</rename>
+        <name>location_id</name>
+        <rename>location_id</rename>
         <default/>
-        <type>Number</type>
+        <type>Integer</type>
       </value>
     </lookup>
     <attributes/>
@@ -1641,8 +1609,115 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
-      <yloc>192</yloc>
+      <xloc>1056</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Database lookup 2 </name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>energy_dw</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>energy_dw</schema>
+      <table>dim_time</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>Y</eat_row_on_failure>
+      <key>
+        <name>date1</name>
+        <field>date_value</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>time_id</name>
+        <rename>time_id</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1184</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update </name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>energy_dw</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>energy_dw</schema>
+      <table>fact_smart_measures</table>
+      <key>
+        <name>location_id</name>
+        <field>location_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>time_id</name>
+        <field>time_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>smart_measures</name>
+        <rename>smart_meter(%)</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>location_id</name>
+        <rename>location_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>time_id</name>
+        <rename>time_id</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1328</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

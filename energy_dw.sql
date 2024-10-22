@@ -30,14 +30,23 @@ CREATE TABLE dim_location (
 );
 
 CREATE TABLE fact_energy_consumption (
-    fact_id INT PRIMARY KEY,
     time_id INT NOT NULL,
     location_id INT NOT NULL,
-    energy_consumption BIGINT,
-    smart_measures FLOAT,
+    energy_consumption BIGINT NOT NULL,
+    PRIMARY KEY (time_id, location_id),
     FOREIGN KEY (time_id) REFERENCES dim_time(time_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (location_id) REFERENCES dim_location(location_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE TABLE fact_smart_measures (
+    time_id INT NOT NULL,
+    location_id INT NOT NULL,
+    smart_measures FLOAT NOT NULL,
+    PRIMARY KEY (time_id, location_id),
+    FOREIGN KEY (time_id) REFERENCES dim_time(time_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (location_id) REFERENCES dim_location(location_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 
 
 DROP PROCEDURE IF EXISTS populate_time_dimension;

@@ -500,11 +500,6 @@
   </connection>
   <order>
     <hop>
-      <from>Add sequence</from>
-      <to>Insert / update</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>CSV file input</from>
       <to>Sort rows</to>
       <enabled>Y</enabled>
@@ -516,45 +511,15 @@
     </hop>
     <hop>
       <from>Unique rows</from>
-      <to>Add sequence</to>
+      <to>Modified JavaScript value</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Modified JavaScript value</from>
+      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
-  <step>
-    <name>Add sequence</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <valuename>location_id</valuename>
-    <use_database>N</use_database>
-    <connection/>
-    <schema/>
-    <seqname>SEQ_</seqname>
-    <use_counter>Y</use_counter>
-    <counter_name/>
-    <start_at>1</start_at>
-    <increment_by>1</increment_by>
-    <max_value>999999999</max_value>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>592</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>CSV file input</name>
     <type>CsvInput</type>
@@ -566,7 +531,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${Internal.Entry.Current.Directory}/datasetB.csv</filename>
+    <filename>/home/aid/dai-project/datasetB.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -730,7 +695,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
+      <xloc>800</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
@@ -797,7 +762,7 @@
     <name>Unique rows</name>
     <type>Unique</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -832,6 +797,89 @@
     </remotesteps>
     <GUI>
       <xloc>480</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Modified JavaScript value</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var result = DistrictMunicipalityParishCode;
+
+// Function to convert alphabetic codes to numeric equivalents
+function convertCode(code) {
+    var replacements = {
+        '0': '00', '1': '01', '2': '02', '3': '03', '4': '04',
+        '5': '05', '6': '06', '7': '07', '8': '08', '9': '09',
+        'A': '10', 'B': '11', 'C': '12', 'D': '13', 'E': '14',
+        'F': '15', 'G': '16', 'H': '17', 'I': '18', 'J': '19',
+        'K': '20', 'L': '21', 'M': '22', 'N': '23', 'O': '24',
+        'P': '25', 'Q': '26', 'R': '27', 'S': '28', 'T': '29',
+        'U': '30', 'V': '31', 'W': '32', 'X': '33', 'Y': '34',
+        'Z': '35'
+    };
+
+    return code.replace(/[A-Z0-9]/g, function(match) {
+        return replacements[match] || match;
+    });
+}
+
+// Check if result is null or undefined
+if (!result) {
+    result = String(DistrictMunicipalityCode * 10000);  // Convert integer to string
+} else {
+    // Get the last two characters of the result
+    var lastTwoChars = result.slice(-2);
+    
+    // Convert last two characters using the conversion function
+    lastTwoChars = convertCode(lastTwoChars);  
+    
+    // Combine the modified last two characters back into the result
+    result = result.slice(0, -2) + lastTwoChars;
+}
+
+// Convert result to number
+var location_id = parseInt(result, 10);
+
+
+
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>location_id</name>
+        <rename>location_id</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
