@@ -508,7 +508,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/aid/dai-project/datasetA.csv</filename>
+    <filename>${Internal.Entry.Current.Directory}/datasetA.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -681,7 +681,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/aid/dai-project/datasetB.csv</filename>
+    <filename>${Internal.Entry.Current.Directory}/datasetB.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
