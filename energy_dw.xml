@@ -56,17 +56,23 @@
         </Level>
       </Hierarchy>
     </Dimension>
-    <Measure name="smart_measures" column="smart_measures" datatype="Numeric" aggregator="avg" visible="true">
+    <Measure name="Smart Meter" column="smart_meter_qty" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Non Smart Meter" column="non_smart_meter_qty" aggregator="sum" visible="true">
     </Measure>
   </Cube>
-  <VirtualCube enabled="true" name="energy_dw">
-    <VirtualCubeDimension cubeName="energy_consumption" foreignKey="location_id" name="Location">
+  <VirtualCube enabled="true" name="energy_dw" visible="true">
+    <VirtualCubeDimension cubeName="energy_consumption" visible="true" foreignKey="location_id" highCardinality="false" name="Location">
     </VirtualCubeDimension>
-    <VirtualCubeDimension cubeName="energy_consumption" foreignKey="time_id" name="Time">
+    <VirtualCubeDimension cubeName="energy_consumption" visible="true" foreignKey="time_id" highCardinality="false" name="Time">
     </VirtualCubeDimension>
     <VirtualCubeMeasure cubeName="energy_consumption" name="[Measures].[energy_consumption]" visible="true">
     </VirtualCubeMeasure>
-    <VirtualCubeMeasure cubeName="smart_measures" name="[Measures].[smart_measures]" visible="true">
+    <VirtualCubeMeasure cubeName="smart_measures" name="[Measures].[Smart Meter]" visible="true">
     </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="smart_measures" name="[Measures].[Non Smart Meter]" visible="true">
+    </VirtualCubeMeasure>
+    <CalculatedMember name="Smart Measures" formula="[Measures].[Smart Meter] / ([Measures].[Smart Meter] + [Measures].[Non Smart Meter]) * 100" dimension="Measures" visible="true">
+    </CalculatedMember>
   </VirtualCube>
 </Schema>
