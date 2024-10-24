@@ -26,7 +26,7 @@ CREATE TABLE dim_location (
     municipality VARCHAR(100) NOT NULL,
     municipality_code INT NOT NULL,
     parish VARCHAR(100) NOT NULL,
-    parish_code VARCHAR(100) 
+    parish_code VARCHAR(100) NOT NULL 
 );
 
 CREATE TABLE fact_energy_consumption (

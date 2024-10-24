@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>proj_dim_location</name>
+    <name>proj_energy_consumption_fact_table</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -427,9 +428,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2024/10/17 19:07:21.030</created_date>
+    <created_date>2024/10/17 19:05:59.562</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2024/10/17 19:07:21.030</modified_date>
+    <modified_date>2024/10/17 19:05:59.562</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -500,38 +501,48 @@
   </connection>
   <order>
     <hop>
-      <from>Sort rows</from>
-      <to>Unique rows</to>
+      <from>Database lookup 3</from>
+      <to>Database lookup 4</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Modified JavaScript value</from>
-      <to>Insert / update</to>
+      <from>Sort rows 2</from>
+      <to>Group by 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CSV file input</from>
-      <to>Sort rows</to>
+      <from>Database lookup 4</from>
+      <to>Insert / update 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Unique rows</from>
-      <to>Filter rows</to>
+      <from>Group by 2</from>
+      <to>Database lookup 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows</from>
-      <to>Modified JavaScript value</to>
+      <from>Select values 3</from>
+      <to>Filter rows 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows</from>
+      <from>Filter rows 2</from>
+      <to>Sort rows 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CSV file input 2</from>
+      <to>Select values 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows 2</from>
       <to>Text file output</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>CSV file input</name>
+    <name>CSV file input 2</name>
     <type>CsvInput</type>
     <description/>
     <distribute>N</distribute>
@@ -556,6 +567,17 @@
     <format>mixed</format>
     <encoding>UTF-8</encoding>
     <fields>
+      <field>
+        <name>Date</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>7</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
       <field>
         <name>District</name>
         <type>String</type>
@@ -587,6 +609,17 @@
         <group>,</group>
         <length>30</length>
         <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Active Energy (kWh)</name>
+        <type>Number</type>
+        <format>#.#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>3</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -633,13 +666,13 @@
     </remotesteps>
     <GUI>
       <xloc>144</xloc>
-      <yloc>160</yloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
+    <name>Database lookup 3</name>
+    <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -649,51 +682,38 @@
       <schema_name/>
     </partitioning>
     <connection>energy_dw</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
     <lookup>
       <schema>energy_dw</schema>
       <table>dim_location</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>location_id</name>
-        <field>location_id</field>
+        <name>district2</name>
+        <field>district_code</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>municipality2</name>
+        <field>municipality_code</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>parish2</name>
+        <field>parish_code</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
         <name>location_id</name>
         <rename>location_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>district</name>
-        <rename>District</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>municipality</name>
-        <rename>Municipality</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>parish</name>
-        <rename>parish</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>parish_code</name>
-        <rename>DistrictMunicipalityParishCode</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>district_code</name>
-        <rename>DistrictCode</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>municipality_code</name>
-        <rename>DistrictMunicipalityCode</rename>
-        <update>Y</update>
+        <default/>
+        <type>Integer</type>
       </value>
     </lookup>
     <attributes/>
@@ -705,14 +725,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
-      <yloc>160</yloc>
+      <xloc>752</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Modified JavaScript value</name>
-    <type>ScriptValueMod</type>
+    <name>Database lookup 4</name>
+    <type>DBLookup</type>
     <description/>
     <distribute>N</distribute>
     <custom_distribution/>
@@ -721,60 +741,29 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var result = DistrictMunicipalityParishCode;
-
-// Function to convert alphabetic codes to numeric equivalents
-function convertCode(code) {
-    var replacements = {
-        '0': '00', '1': '01', '2': '02', '3': '03', '4': '04',
-        '5': '05', '6': '06', '7': '07', '8': '08', '9': '09',
-        'A': '10', 'B': '11', 'C': '12', 'D': '13', 'E': '14',
-        'F': '15', 'G': '16', 'H': '17', 'I': '18', 'J': '19',
-        'K': '20', 'L': '21', 'M': '22', 'N': '23', 'O': '24',
-        'P': '25', 'Q': '26', 'R': '27', 'S': '28', 'T': '29',
-        'U': '30', 'V': '31', 'W': '32', 'X': '33', 'Y': '34',
-        'Z': '35'
-    };
-
-    return code.replace(/[A-Z0-9]/g, function(match) {
-        return replacements[match] || match;
-    });
-}
-
-
-var lastTwoChars = result.slice(-2);
-    
-// Convert last two characters using the conversion function
-
-lastTwoChars = convertCode(lastTwoChars);  
-    
-// Combine the modified last two characters back into the result
-result = result.slice(0, -2) + lastTwoChars;
-
-// Convert result to number
-var location_id = parseInt(result, 10);
-
-
-
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>location_id</name>
-        <rename>location_id</rename>
+    <connection>energy_dw</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>energy_dw</schema>
+      <table>dim_time</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>date2</name>
+        <field>date_value</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>time_id</name>
+        <rename>time_id</rename>
+        <default/>
         <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -784,114 +773,13 @@ var location_id = parseInt(result, 10);
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>160</yloc>
+      <xloc>896</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>DistrictCode</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>DistrictMunicipalityCode</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>DistrictMunicipalityParishCode</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Unique rows</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
-      <field>
-        <name>DistrictCode</name>
-        <case_insensitive>Y</case_insensitive>
-      </field>
-      <field>
-        <name>DistrictMunicipalityCode</name>
-        <case_insensitive>Y</case_insensitive>
-      </field>
-      <field>
-        <name>DistrictMunicipalityParishCode</name>
-        <case_insensitive>Y</case_insensitive>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows</name>
+    <name>Filter rows 2</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -901,7 +789,7 @@ var location_id = parseInt(result, 10);
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>Modified JavaScript value</send_true_to>
+    <send_true_to>Sort rows 2</send_true_to>
     <send_false_to>Text file output</send_false_to>
     <compare>
       <condition>
@@ -909,42 +797,53 @@ var location_id = parseInt(result, 10);
         <conditions>
           <condition>
             <negated>N</negated>
-            <leftvalue>District</leftvalue>
+            <leftvalue>date2</leftvalue>
             <function>IS NOT NULL</function>
             <rightvalue/>
           </condition>
           <condition>
             <negated>N</negated>
             <operator>AND</operator>
-            <leftvalue>Municipality</leftvalue>
+            <leftvalue>district2</leftvalue>
+            <function>&gt;</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>Integer</type>
+              <text>0</text>
+              <length>-1</length>
+              <precision>0</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>AND</operator>
+            <leftvalue>municipality2</leftvalue>
+            <function>&gt;</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>Integer</type>
+              <text>0</text>
+              <length>-1</length>
+              <precision>0</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>AND</operator>
+            <leftvalue>parish2</leftvalue>
             <function>IS NOT NULL</function>
             <rightvalue/>
           </condition>
           <condition>
             <negated>N</negated>
             <operator>AND</operator>
-            <leftvalue>parish</leftvalue>
-            <function>IS NOT NULL</function>
-            <rightvalue/>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>AND</operator>
-            <leftvalue>DistrictCode</leftvalue>
-            <function>IS NOT NULL</function>
-            <rightvalue/>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>AND</operator>
-            <leftvalue>DistrictMunicipalityCode</leftvalue>
-            <function>IS NOT NULL</function>
-            <rightvalue/>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>AND</operator>
-            <leftvalue>DistrictMunicipalityParishCode</leftvalue>
+            <leftvalue>Active Energy (kWh)</leftvalue>
             <function>IS NOT NULL</function>
             <rightvalue/>
           </condition>
@@ -960,8 +859,236 @@ var location_id = parseInt(result, 10);
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>160</yloc>
+      <xloc>384</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Group by 2</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>date2</name>
+      </field>
+      <field>
+        <name>district2</name>
+      </field>
+      <field>
+        <name>municipality2</name>
+      </field>
+      <field>
+        <name>parish2</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>energy_consumption</aggregate>
+        <subject>Active Energy (kWh)</subject>
+        <type>SUM</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update 2</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>energy_dw</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>energy_dw</schema>
+      <table>fact_energy_consumption</table>
+      <key>
+        <name>location_id</name>
+        <field>location_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>time_id</name>
+        <field>time_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>energy_consumption</name>
+        <rename>energy_consumption</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>location_id</name>
+        <rename>location_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>time_id</name>
+        <rename>time_id</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1040</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 3</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>Date</name>
+        <rename>date2</rename>
+      </field>
+      <field>
+        <name>DistrictCode</name>
+        <rename>district2</rename>
+      </field>
+      <field>
+        <name>DistrictMunicipalityCode</name>
+        <rename>municipality2</rename>
+      </field>
+      <field>
+        <name>DistrictMunicipalityParishCode</name>
+        <rename>parish2</rename>
+      </field>
+      <field>
+        <name>Active Energy (kWh)</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>date2</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>district2</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>municipality2</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>parish2</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -990,10 +1117,10 @@ var location_id = parseInt(result, 10);
     <fileNameField/>
     <create_parent_folder>N</create_parent_folder>
     <file>
-      <name>bad_location</name>
+      <name>bad_data_datasetB</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
+      <extention>csv</extention>
       <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
@@ -1017,12 +1144,24 @@ var location_id = parseInt(result, 10);
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>272</yloc>
+      <xloc>384</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
+    <error>
+      <source_step>Database lookup 4</source_step>
+      <target_step>Sort rows 3</target_step>
+      <is_enabled>Y</is_enabled>
+      <nr_valuename/>
+      <descriptions_valuename/>
+      <fields_valuename/>
+      <codes_valuename/>
+      <max_errors/>
+      <max_pct_errors/>
+      <min_pct_rows/>
+    </error>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>
