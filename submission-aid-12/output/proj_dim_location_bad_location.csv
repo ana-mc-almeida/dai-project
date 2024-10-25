@@ -1,0 +1,15 @@
+District;Municipality;parish;DistrictCode;DistrictMunicipalityCode;DistrictMunicipalityParishCode
+AVEIRO          ;Aveiro                     ;AVEIRO                        ;1;105;
+BEJA            ;Beja                       ;BEJA                          ;2;205;
+BRAGA           ;Braga                      ;BRAGA                         ;3;303;
+BRAGANCA        ;Bragança                   ;BRAGANCA                      ;4;402;
+COIMBRA         ;Coimbra                    ;COIMBRA                       ;6;603;
+EVORA           ;Évora                      ;EVORA                         ;7;705;
+FARO            ;Faro                       ;FARO                          ;8;805;
+LEIRIA          ;Leiria                     ;LEIRIA                        ;10;1009;
+LISBOA          ;Lisboa                     ;LISBOA                        ;11;1106;
+PORTALEGRE      ;Portalegre                 ;PORTALEGRE                    ;12;1214;
+PORTO           ;Porto                      ;PORTO                         ;13;1312;
+SANTAREM        ;Santarém                   ;SANTAREM                      ;14;1416;
+SETUBAL         ;Setúbal                    ;SETUBAL                       ;15;1512;
+VIANA DO CASTELO;Viana do Castelo           ;VIANA DO CASTELO              ;16;1609;

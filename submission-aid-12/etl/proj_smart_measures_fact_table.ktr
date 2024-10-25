@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>proj_energy_consumption_fact_table</name>
+    <name>proj_smart_measures_fact_table</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,9 +427,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2024/10/17 19:05:59.562</created_date>
+    <created_date>2024/10/24 11:41:10.068</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2024/10/17 19:05:59.562</modified_date>
+    <modified_date>2024/10/24 11:41:10.068</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -501,18 +500,28 @@
   </connection>
   <order>
     <hop>
-      <from>Database lookup </from>
-      <to>Database lookup 2</to>
+      <from>CSV file input </from>
+      <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort rows </from>
-      <to>Group by </to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Database lookup 2</from>
+      <from>Database lookup 2 </from>
       <to>Insert / update </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Database lookup </from>
+      <to>Database lookup 2 </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows</from>
+      <to>Text file output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows</from>
+      <to>Formula </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -521,22 +530,17 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values </from>
-      <to>Filter rows </to>
+      <from>Select values</from>
+      <to>Filter rows</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CSV file input </from>
-      <to>Select values </to>
+      <from>Sort rows </from>
+      <to>Group by </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows </from>
-      <to>Text file output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filter rows </from>
+      <from>Formula </from>
       <to>Sort rows </to>
       <enabled>Y</enabled>
     </hop>
@@ -545,14 +549,14 @@
     <name>CSV file input </name>
     <type>CsvInput</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${Internal.Entry.Current.Directory}/datasetB.csv</filename>
+    <filename>/home/aid/dai-project/datasetA.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -565,7 +569,7 @@
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
     <format>mixed</format>
-    <encoding>UTF-8</encoding>
+    <encoding/>
     <fields>
       <field>
         <name>Date</name>
@@ -579,47 +583,25 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>District</name>
+        <name>Includes Smart Meter</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>16</length>
+        <length>3</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Municipality</name>
-        <type>String</type>
-        <format/>
+        <name>Number of CPE's</name>
+        <type>Integer</type>
+        <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>27</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>parish</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>30</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Active Energy (kWh)</name>
-        <type>Number</type>
-        <format>#.#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>12</length>
-        <precision>3</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -666,7 +648,7 @@
     </remotesteps>
     <GUI>
       <xloc>144</xloc>
-      <yloc>64</yloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -674,7 +656,7 @@
     <name>Database lookup </name>
     <type>DBLookup</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -692,19 +674,19 @@
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>district2</name>
+        <name>district1</name>
         <field>district_code</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>municipality2</name>
+        <name>municipality1</name>
         <field>municipality_code</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>parish2</name>
+        <name>parish1</name>
         <field>parish_code</field>
         <condition>=</condition>
         <name2/>
@@ -725,13 +707,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>64</yloc>
+      <xloc>816</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Database lookup 2</name>
+    <name>Database lookup 2 </name>
     <type>DBLookup</type>
     <description/>
     <distribute>N</distribute>
@@ -752,7 +734,7 @@
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>date2</name>
+        <name>date1</name>
         <field>date_value</field>
         <condition>=</condition>
         <name2/>
@@ -773,13 +755,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
-      <yloc>64</yloc>
+      <xloc>944</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Filter rows </name>
+    <name>Filter rows</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -789,7 +771,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>Sort rows </send_true_to>
+    <send_true_to>Formula </send_true_to>
     <send_false_to>Text file output</send_false_to>
     <compare>
       <condition>
@@ -797,14 +779,14 @@
         <conditions>
           <condition>
             <negated>N</negated>
-            <leftvalue>date2</leftvalue>
+            <leftvalue>date1</leftvalue>
             <function>IS NOT NULL</function>
             <rightvalue/>
           </condition>
           <condition>
             <negated>N</negated>
             <operator>AND</operator>
-            <leftvalue>district2</leftvalue>
+            <leftvalue>district1</leftvalue>
             <function>&gt;</function>
             <rightvalue/>
             <value>
@@ -820,7 +802,7 @@
           <condition>
             <negated>N</negated>
             <operator>AND</operator>
-            <leftvalue>municipality2</leftvalue>
+            <leftvalue>municipality1</leftvalue>
             <function>&gt;</function>
             <rightvalue/>
             <value>
@@ -836,16 +818,41 @@
           <condition>
             <negated>N</negated>
             <operator>AND</operator>
-            <leftvalue>parish2</leftvalue>
+            <leftvalue>parish1</leftvalue>
             <function>IS NOT NULL</function>
             <rightvalue/>
           </condition>
           <condition>
             <negated>N</negated>
             <operator>AND</operator>
-            <leftvalue>Active Energy (kWh)</leftvalue>
-            <function>IS NOT NULL</function>
+            <leftvalue>number_of_cpes</leftvalue>
+            <function>&gt;=</function>
             <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>Integer</type>
+              <text>0</text>
+              <length>-1</length>
+              <precision>0</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>AND</operator>
+            <leftvalue>includes_smart_meter</leftvalue>
+            <function>IN LIST</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>Sim;Não</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask/>
+            </value>
           </condition>
         </conditions>
       </condition>
@@ -859,8 +866,49 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>64</yloc>
+      <xloc>368</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Formula </name>
+    <type>Formula</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <formula>
+      <field_name>Smart_meter</field_name>
+      <formula_string>([includes_smart_meter]="Sim") *  [number_of_cpes]</formula_string>
+      <value_type>Number</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field/>
+    </formula>
+    <formula>
+      <field_name>Non_smart_meter</field_name>
+      <formula_string>([includes_smart_meter]="Não") *  [number_of_cpes]</formula_string>
+      <value_type>Number</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field/>
+    </formula>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -885,22 +933,28 @@
     <give_back_row>N</give_back_row>
     <group>
       <field>
-        <name>date2</name>
+        <name>date1</name>
       </field>
       <field>
-        <name>district2</name>
+        <name>district1</name>
       </field>
       <field>
-        <name>municipality2</name>
+        <name>municipality1</name>
       </field>
       <field>
-        <name>parish2</name>
+        <name>parish1</name>
       </field>
     </group>
     <fields>
       <field>
-        <aggregate>energy_consumption</aggregate>
-        <subject>Active Energy (kWh)</subject>
+        <aggregate>smart_meter</aggregate>
+        <subject>Smart_Meter</subject>
+        <type>SUM</type>
+        <valuefield/>
+      </field>
+      <field>
+        <aggregate>non_smart_meter</aggregate>
+        <subject>Non_Smart_Meter</subject>
         <type>SUM</type>
         <valuefield/>
       </field>
@@ -914,8 +968,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
-      <yloc>64</yloc>
+      <xloc>704</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -935,7 +989,7 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>energy_dw</schema>
-      <table>fact_energy_consumption</table>
+      <table>fact_smart_measures</table>
       <key>
         <name>location_id</name>
         <field>location_id</field>
@@ -949,8 +1003,13 @@
         <name2/>
       </key>
       <value>
-        <name>energy_consumption</name>
-        <rename>energy_consumption</rename>
+        <name>smart_meter_qty</name>
+        <rename>smart_meter</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>non_smart_meter_qty</name>
+        <rename>non_smart_meter</rename>
         <update>Y</update>
       </value>
       <value>
@@ -973,13 +1032,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1040</xloc>
-      <yloc>64</yloc>
+      <xloc>1088</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values </name>
+    <name>Select values</name>
     <type>SelectValues</type>
     <description/>
     <distribute>N</distribute>
@@ -992,23 +1051,27 @@
     <fields>
       <field>
         <name>Date</name>
-        <rename>date2</rename>
+        <rename>date1</rename>
       </field>
       <field>
         <name>DistrictCode</name>
-        <rename>district2</rename>
+        <rename>district1</rename>
       </field>
       <field>
         <name>DistrictMunicipalityCode</name>
-        <rename>municipality2</rename>
+        <rename>municipality1</rename>
       </field>
       <field>
         <name>DistrictMunicipalityParishCode</name>
-        <rename>parish2</rename>
+        <rename>parish1</rename>
       </field>
       <field>
-        <name>Active Energy (kWh)</name>
-        <rename/>
+        <name>Number of CPE's</name>
+        <rename>number_of_cpes</rename>
+      </field>
+      <field>
+        <name>Includes Smart Meter</name>
+        <rename>includes_smart_meter</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1021,8 +1084,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
-      <yloc>64</yloc>
+      <xloc>256</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1039,14 +1102,14 @@
     </partitioning>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>out</prefix>
-    <sort_size>1000</sort_size>
+    <sort_size>1000000</sort_size>
     <free_memory/>
     <compress>N</compress>
     <compress_variable/>
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>date2</name>
+        <name>date1</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1054,7 +1117,7 @@
         <presorted>N</presorted>
       </field>
       <field>
-        <name>district2</name>
+        <name>district1</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1062,7 +1125,7 @@
         <presorted>N</presorted>
       </field>
       <field>
-        <name>municipality2</name>
+        <name>municipality1</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1070,7 +1133,7 @@
         <presorted>N</presorted>
       </field>
       <field>
-        <name>parish2</name>
+        <name>parish1</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1087,8 +1150,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>64</yloc>
+      <xloc>576</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1117,7 +1180,7 @@
     <fileNameField/>
     <create_parent_folder>N</create_parent_folder>
     <file>
-      <name>bad_data_datasetB</name>
+      <name>/home/aid/dai-project/submission-aid-12/output/datasetA_bad_data</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>csv</extention>
@@ -1144,24 +1207,12 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>208</yloc>
+      <xloc>368</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
-    <error>
-      <source_step>Database lookup 2</source_step>
-      <target_step/>
-      <is_enabled>Y</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename/>
-      <fields_valuename/>
-      <codes_valuename/>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>
