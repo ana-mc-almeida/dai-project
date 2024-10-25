@@ -3,14 +3,14 @@
     <job-metadata>
         <job-description>Created with DataCleaner Community edition 5.8.1</job-description>
         <author>aid</author>
-        <updated-date>2024-09-21+01:00</updated-date>
+        <updated-date>2024-10-25+01:00</updated-date>
         <metadata-properties>
-            <property name="CoordinatesX.Project.SmartMeterPercent_and_AvgConsumtionPerContract_byMunicipality_june2024.csv">145</property>
-            <property name="CoordinatesY.Project.SmartMeterPercent_and_AvgConsumtionPerContract_byMunicipality_june2024.csv">184</property>
+            <property name="CoordinatesY.output.task1_output.csv">293</property>
+            <property name="CoordinatesX.output.task1_output.csv">317</property>
         </metadata-properties>
     </job-metadata>
     <source>
-        <data-context ref="SmartMeterPercent_and_AvgConsumtionPerContract_byMunicipality_june2024.csv"/>
+        <data-context ref="task1_output.csv"/>
         <columns>
             <column id="col_municipality" path="Municipality" type="STRING"/>
             <column id="col_smartmeter" path="Smart Meter (%)" type="STRING"/>
@@ -21,8 +21,8 @@
         <transformer>
             <descriptor ref="Convert to number"/>
             <metadata-properties>
-                <property name="CoordinatesY">285</property>
-                <property name="CoordinatesX">158</property>
+                <property name="CoordinatesY">300</property>
+                <property name="CoordinatesX">674</property>
             </metadata-properties>
             <properties>
                 <property name="Decimal separator" value="."/>
@@ -32,20 +32,20 @@
             </properties>
             <input ref="col_smartmeter"/>
             <input ref="col_consumptionpercontractkwh"/>
-            <output id="col_smartmeter2" name="Smart Meter (%) "/>
-            <output id="col_consumptionpercontractkwh2" name="Consumption per Contract (kWh) "/>
+            <output id="col_smartmeterasnumber" name="Smart Meter (%) (as number)"/>
+            <output id="col_consumptionpercontractkwhasnumber" name="Consumption per Contract (kWh) (as number)"/>
         </transformer>
     </transformation>
     <analysis>
         <analyzer>
             <descriptor ref="Scatter plot"/>
             <metadata-properties>
-                <property name="CoordinatesY">381</property>
-                <property name="CoordinatesX">161</property>
+                <property name="CoordinatesY">297</property>
+                <property name="CoordinatesX">965</property>
             </metadata-properties>
             <properties/>
-            <input ref="col_smartmeter2" name="Variable1"/>
-            <input ref="col_consumptionpercontractkwh2" name="Variable2"/>
+            <input ref="col_smartmeterasnumber" name="Variable1"/>
+            <input ref="col_consumptionpercontractkwhasnumber" name="Variable2"/>
         </analyzer>
     </analysis>
 </job>
