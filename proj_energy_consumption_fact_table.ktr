@@ -501,48 +501,48 @@
   </connection>
   <order>
     <hop>
-      <from>Database lookup 3</from>
-      <to>Database lookup 4</to>
+      <from>Database lookup </from>
+      <to>Database lookup 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort rows 2</from>
-      <to>Group by 2</to>
+      <from>Sort rows </from>
+      <to>Group by </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Database lookup 4</from>
-      <to>Insert / update 2</to>
+      <from>Database lookup 2</from>
+      <to>Insert / update </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Group by 2</from>
-      <to>Database lookup 3</to>
+      <from>Group by </from>
+      <to>Database lookup </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 3</from>
-      <to>Filter rows 2</to>
+      <from>Select values </from>
+      <to>Filter rows </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows 2</from>
-      <to>Sort rows 2</to>
+      <from>CSV file input </from>
+      <to>Select values </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CSV file input 2</from>
-      <to>Select values 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filter rows 2</from>
+      <from>Filter rows </from>
       <to>Text file output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows </from>
+      <to>Sort rows </to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>CSV file input 2</name>
+    <name>CSV file input </name>
     <type>CsvInput</type>
     <description/>
     <distribute>N</distribute>
@@ -671,7 +671,7 @@
     </GUI>
   </step>
   <step>
-    <name>Database lookup 3</name>
+    <name>Database lookup </name>
     <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -731,7 +731,7 @@
     </GUI>
   </step>
   <step>
-    <name>Database lookup 4</name>
+    <name>Database lookup 2</name>
     <type>DBLookup</type>
     <description/>
     <distribute>N</distribute>
@@ -779,7 +779,7 @@
     </GUI>
   </step>
   <step>
-    <name>Filter rows 2</name>
+    <name>Filter rows </name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -789,7 +789,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>Sort rows 2</send_true_to>
+    <send_true_to>Sort rows </send_true_to>
     <send_false_to>Text file output</send_false_to>
     <compare>
       <condition>
@@ -859,13 +859,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
+      <xloc>400</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Group by 2</name>
+    <name>Group by </name>
     <type>GroupBy</type>
     <description/>
     <distribute>N</distribute>
@@ -920,7 +920,7 @@
     </GUI>
   </step>
   <step>
-    <name>Insert / update 2</name>
+    <name>Insert / update </name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -979,7 +979,7 @@
     </GUI>
   </step>
   <step>
-    <name>Select values 3</name>
+    <name>Select values </name>
     <type>SelectValues</type>
     <description/>
     <distribute>N</distribute>
@@ -1027,7 +1027,7 @@
     </GUI>
   </step>
   <step>
-    <name>Sort rows 2</name>
+    <name>Sort rows </name>
     <type>SortRows</type>
     <description/>
     <distribute>N</distribute>
@@ -1111,7 +1111,7 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
@@ -1144,15 +1144,15 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>160</yloc>
+      <xloc>400</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
     <error>
-      <source_step>Database lookup 4</source_step>
-      <target_step>Sort rows 3</target_step>
+      <source_step>Database lookup 2</source_step>
+      <target_step/>
       <is_enabled>Y</is_enabled>
       <nr_valuename/>
       <descriptions_valuename/>
