@@ -285,11 +285,26 @@ In **Task 8**, we performed three key analyses:
 
 1. **Evolution of Energy Consumption and Smart Meter Adoption**:  
    - Energy consumption **increased** in districts like Lisboa and Porto but **decreased** in Coimbra.  
-   - The percentage of smart meters **increased across all districts**, but this did not significantly impact energy consumption.  
+   - The percentage of smart meters **increased across all districts**, but this did not significantly impact energy consumption.
+
+> Dizer que só havia dados completos de smart meters para 2023, o que não dava para fazer uma análise.
+> Por isso, passamos a analizar todos os anos onde havia informação sobre smart meters 
+
+> Conclusões: 
+> - The energy consumption has increased over the years in districts of Castelo Branco, Évora, Faro, Lisboa, Porto and Setúbal. The energy consumption remained roughly the same in the districts of Aveiro, Braga, Beja, Bragança, Guarda, Leiria, Portalegre, Santarém, Viana do Castelo, Vila Real and Viseu. Has decreased in Coimbra.
+> - The percentage of smart meters increased for all districts over the years.
 
 2. **Seasonal Influence on Consumption**:  
    - Southern regions like Faro had higher consumption in **summer**, likely due to air conditioning and tourism.  
    - Northern regions like Porto had higher consumption in **winter**, likely due to heating needs.  
+
+> Conclusion:
+> - There is a clear influence of the season on energy consumption. 
+> - We verify that in portuguese southern regions of Algarve and Alentejo (Faro, Beja, Portalegre, Évora) have higher energy consumption in > Summer.
+> - Northern and Central districts (Lisboa appears as an exception) such as Vila Real, Viseu, Castelo Branco, Aveiro, Leiria Guarda, Viana do > Castelo, Bragança, Braga and Porto, winters are more demanding.
+> - Milder districts like Coimbra, Setúbal and Santarém present an even energy consumption over all year.
+> - We can suppose that these seasonal influences on energy consumption may stem from factors such as increased tourism or temperature changes that lead to greater use of air conditioning or heating or energy for other sources.
+
 
 3. **Impact of Smart Meters on Consumption**:  
    - There is **no significant impact** of smart meters on energy consumption, aligning with the findings from Task 2.  
