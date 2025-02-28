@@ -2,8 +2,9 @@
 
 > ### Slide 1: Apresentação - Ana
 > 
-> Bom dia, estimados membros do juri.O meu nome é Ana e este é o meu colega Vasco e hoje vimos apresentar-vos o nosso projeto realizado no ambito da cadeira de Análise e Integração de Dados.  
-> Queremos desde já parabenizar os restantes grupos pelo seu desempenho, agradecer a oportunidade de mostrar o nosso trabalho e o reconhecimento do nosso esforço e dedicação.  
+> Bom dia, estimados membros do juri.  
+> O meu nome é Ana e este é o meu colega Vasco e hoje vimos apresentar-vos o nosso projeto realizado no ambito da cadeira de Análise e Integração de Dados.  
+> Queremos desde já expressar a nossa gratidão pelo reconhecimento do nosso esforço e dedicação, agradecer a oportunidade de mostrar o nosso trabalho e  dar os parabens aos restantes grupos pelo seu desempenho.
 
 ### Slide 2: Project Overview - Objetivo do Projeto - Vasco
 
@@ -30,10 +31,10 @@ Para alcançar o objetivo do projeto foi necessário integrar e analisar os dado
 
 > ### Slide 4: Challenges and Solutions - Ana
 > 
-> Durante o desenvolvimento do projeto, deparamo-nos com alguns desafios, nomeadamente:
-> 1. Para começar, os datasets utilizados não partilhavam a mesma cronologia. De forma a integrarmos o máximo de informação possível, e evitando linhas sem informação, optamos por criar um esquema em constelação com duas tabelas de factos.
-> 2. Outro desafio foi lidar com irregularidades na informação e com os valores nulos provenientes dos datasets devido às politica de RGPD. Para resolver este problema, foi necessária a sua validação e filtragem.
-> 3. Por fim, a criação do OLAP cube foi um desafio, uma vez que o Pentaho apenas suporta esquemas em estrela. Assim, utilizamos um virtual cube para agregar medidas das duas tabelas de fatos, permitindo análises multidimensionais avançadas.
+> Durante o desenvolvimento do projeto, deparamo-nos com alguns desafios.
+> 1. Começando pelo facto dos datasets utilizados não partilharem a mesma cronologia foi necessária arranjar forma de integrarmos o máximo de informação possível, e evitar linhas sem informação. Acabamos por optar por criar um esquema em constelação com duas tabelas de factos.
+> 2. Outro desafio foi lidar com irregularidades na informação e com os valores nulos provenientes dos datasets devido às politica de RGPD. Para resolver este problema, foi necessária a validação e filtragem dos dados.
+> 3. Por fim, a criação do OLAP cube foi um desafio. Uma vez que o Pentaho apenas suporta esquemas em estrela foi necessário utilizamos um virtual cube para agregar as medidas das duas tabelas de fatos, permitindo análises multidimensionais avançadas.
 
 ### Slide 5: Task 1 - Vasco
 
@@ -49,11 +50,9 @@ De seguida, analisámos a existência de correlação entre as métricas de inte
 > 
 > A terceira tarefa consistia em mapear os distritos entre os dois datasets. 
 > 
-> Com a atualização dos dados pela E-Redes, os nomes dos distritos apresentavam configuração idêntica. Ainda assim, assumiu-se a existência de ligeiras diferenças.
+> Com a atualização dos dados pela E-Redes, os nomes dos distritos apresentavam configuração idêntica. Ainda assim, assumiu-se a existência de ligeiras diferenças e então utilizamos a transformação apresentada no slide, e a métrica de similaridade de Jaro-Winkler com um treshold de 0.95.
 > 
-> Utilizando a transformação apresentada no slide, e a métrica de similaridade de Jaro-Winkler com um treshold de 0.95, esta tarefa foi realizada com sucesso.
-> 
-> Esta métrica foi escolhida uma vez que é ideal para comparar pequenas strings, como o caso dos nomes dos distritos, considerando a similaridade e posição de cada caracter.
+> Esta métrica foi escolhida uma vez que é ideal para comparar pequenas strings, como é o caso dos nomes dos distritos, uma vez que considera a similaridade e posição de cada caracter.
 
 ### Slide 8: Task 4 - Vasco
 
@@ -73,31 +72,26 @@ Relativamente às tabelas de factos criamos duas transformações que envolviam:
 
 > ### Slide 11: Task 7 - Ana 
 > 
-> Na Tarefa 7, definimos um virtual OLAP cube para agregar as medidas de ambas as tabelas de fatos, permitindo a análise multidimensional.
+> Na Tarefa 7, definimos um virtual OLAP cube para agregar as medidas de ambas as tabelas de fatos, permitindo assim a análise multidimensional.
 > 
-> Assim, foi necessário criar um cubo com as medidas de consumo de energia, outro com os números de contratos com e sem smart meters, e agregá-los  no cubo final. Às métricas anteriormente mencionadas acresentou-se um calculated member correspondente com a percentagem de adoção de smart meters uma vez que estamos a lidar com uma medida não aditiva.
+> Para tal foi necessário criar um cubo com as medidas de consumo de energia, outro com os números de contratos com e sem smart meters, e agregá-los no cubo final. 
+> Às métricas anteriormente mencionadas acresentou-se um calculated member correspondente à percentagem de adoção de smart meters uma vez que estamos a lidar com uma medida não aditiva.
 > 
 > ### Slide 12: Task 8 - Ana
 > 
-> Finalmente, manipulando o cubo criado e utilizando o Saiku Analytics executamos MDX queries que nos permitiram a produção dos gráficos mais informativos para responder às seguintes questões:
-
-! explicitar que usamos MDX queries e que estas foram o mais eficientes possíveis
-
-! explicitar que foram possiveis vários gráficos mas que nesta apresentação só vamos mostrar o que achamos que demonstra melhor as respostas às perguntas
-
-> 1. Terá o consumo de energia aumentado de um ano para o outro?
->   - Com este gráfico de linhas conseguimos concluir que aumentou em algumas regiões como Faro e Lisboa, mas que diminiu em outras como em Coimbra.
-> 2. Terá a percetagem de adoção de smart meters aumentado?
+> Finalmente, manipulando o cubo criado e utilizando o Saiku Analytics executamos MDX queries que nos permitiram a produção dos gráficos mais informativos para responder às questões que eram colocadas:
+> 1. A primeira questão era se o consumo de energia teria aumentado ou diminuido de um ano para o outro?
+>   - Entre diferentes tipos de gráficos optamos por este gráfico de linhas que nos permite analisar o consumo de energia para cada distrito, em 3 anos diferentes.
+>   - Ao observa-lo concluimos que o consumo de energia aumentou em algumas regiões como Faro e Lisboa, mas que diminiu em outras como em Coimbra.
+> 2. A pergunta seguinte, semelhante à anterior, questionava se a percetagem de adoção de smart meters aumentado ou diminuido ao longo dos anos?
 >   - Com este gráfico de linhas observa-se a crescente adoção de contadores inteligentes em todas as regiões portuguesas.
-> 3. Qual é a influencia da estação do ano no consumo de energia?
->   - Os gráficos de barras criados revelam que em regiões mais a Sul como Faro tem maior consumo no verão enquanto que em regiões mais a Norte, como Porto,tal se sucede no inverno.
-
-! falar que regulamos a escala dos gráficos para melhor visualização - MDX queries
-
-! falar sobre os aquecedores e ar condicionados
-
-> 4. A percentagem de adoção de smart meters influencia o consumo de energia?
->    - Com este gráfico, tal como previsto após a realização da tarefa 2, verifica-se que não existe evidência de uma correlação entre a adoção de smart meters e o consumo de energia.
+> 3. A terceira pergunta era qual seria a a influencia da estação do ano no consumo de energia?
+>   - De forma a analisar melhor as informações decidimos utilizar gráficos de barras, mas como o consumo de energia varia muito entre regiões, acabamos por executar 3 MDX queries diferentes que nos permitiram ajustar a escala dos gráficos para melhor visualização.
+>   - Os gráficos de barras criados revelam que em regiões mais a Sul como Faro tem maior consumo no verão enquanto as regiões mais a Norte, como no Porto, tal se sucede no inverno.
+>   - Podemos colocar a hipotese de que este facto se deve ao aumento do turismo em certas regiões ou à diferenças de temperatura ao longo do ano que acabam por levar a um maior uso de ar condicionado na zona Sul e de aquecedores na zona Norte.
+> 4. Por fim, a última pergunta era se a percentagem de adoção de smart meters influencia o consumo de energia?
+>   - Tal como já tinha sido analisado na tarefa 2, acabamos por concluir que não existe correlação entre a adoção de smart meters e o consumo de energia.
+>   - Conseguimos chegar a essa conclusão através deste gráfico de linhas que proporcionalmente aumenta a percentagem de adoção de smart meters de forma a ser possivel visualizar que este valor se mantem sempre crescente ao longo do ano para todas as regiões enquanto que o consumo de energia varia de forma irregular. 
 
 ### Slide 16: Relevância no Mundo Real - Vasco
 Todas estas análises permitem ajudar a enfrentar desafios do setor do consumo de energia uma vez que nos ajudam a:
